@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/css/style.css" />
+    <script src="dist/js/bundle.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>Todo Vanilla</title>
+</head>
+<body>
+    <main>
+        <h1>Todo List Vanilla JS</h1>
+        <form id="addtask">
+            <textarea rows="1" class="text-white bg-slate-600 bg-opacity-60 border border-slate-600 rounded-3xl w-full pr-7 pl-14 py-3 placeholder:text-slate-400 focus-within:outline-none focus-within:bg-opacity-100 focus-within:placeholder:text-transparent transition-colors" placeholder="Add a task"></textarea>
+            <i data-lucide="plus" class="w-6 h-6 text-orange-400 absolute top-3 left-5"></i>
+        </form>
+        <div id="opentasks" class="mb-8 tasklist">
+            <h2>Your open tasks</h2>
+            <div class="text-center text-slate-400 hidden" id="noopentasks">
+                <i data-lucide="cup-soda" class="w-40 h-40 m-auto stroke-1 text-slate-500 mb-3"></i>
+                You don't have any open tasks.<br>
+                Enjoy your day!
+            </div>
+
+            <ul class="tasks"></ul>
+        </div>
+
+        <div id="closedtasks" class="tasklist">
+            <h2>What you finished</h2>
+
+            <ul class="tasks"></ul>
+        </div>
+    </main>
+    
+</body>
+</html>
