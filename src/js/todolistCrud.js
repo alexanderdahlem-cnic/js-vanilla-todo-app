@@ -4,6 +4,10 @@ export default function todolistCrud () {
     let opentasks = []; // List of open tasks
     let closedtasks = []; // List of finished tasks
 
+    const ulOpen = document.querySelector('#opentasks ul');
+    const ulClosed = document.querySelector('#closedtasks ul');
+    const noOpenInfo = document.querySelector('#noopentasks');
+
     const init = () => {
         prepareElements();
         readEntries();
@@ -78,8 +82,8 @@ export default function todolistCrud () {
 
     const renderEntries = () => {
 
-        document.querySelector('#opentasks ul').innerHTML = '';
-        document.querySelector('#closedtasks ul').innerHTML = '';
+        ulOpen.innerHTML = '';
+        ulClosed.innerHTML = '';
         
         if (data && data.length > 0) {
 
@@ -87,18 +91,18 @@ export default function todolistCrud () {
             closedtasks = data.filter(task => task.done);
 
             if (opentasks.length > 0) {
-                document.querySelector('#noopentasks').classList.add('hidden');
-                opentasks.forEach(task => renderEntry(document.querySelector('#opentasks ul'), task));
+                noOpenInfo.classList.add('hidden');
+                opentasks.forEach(task => renderEntry(ulOpen, task));
             } else {
-                document.querySelector('#noopentasks').classList.remove('hidden');
+                noOpenInfo.classList.remove('hidden');
             }
 
             if (closedtasks.length > 0) {
-                closedtasks.forEach(task => renderEntry(document.querySelector('#closedtasks ul'), task));
+                closedtasks.forEach(task => renderEntry(ulClosed, task));
             }
 
         } else {
-            document.querySelector('#noopentasks').classList.remove('hidden');
+            noOpenInfo.classList.remove('hidden');
         }
 
         lucide.createIcons();
@@ -120,7 +124,7 @@ export default function todolistCrud () {
                     </div>
                 </li>`;
 
-        target.innerHTML += liHtml;
+        target.insertAdjacentHTML('beforeend', liHtml);
     }
 
     // Create
@@ -138,6 +142,10 @@ export default function todolistCrud () {
         saveStorage();
     }
 
+    const getEntryIndex = (id) => {
+        return  data.findIndex((entry) => entry.id === Number(id));
+    }
+
     // Read
 
     const readEntries = () => {
@@ -148,30 +156,33 @@ export default function todolistCrud () {
     // Update
 
     const updateEntry = (value, id) => {
-        id = Number(id);
-        const objIndex = data.findIndex((entry) => entry.id === id);
+        const objIndex = getEntryIndex(id);
+        if (objIndex < 0) return;
         data[objIndex].task = value;
         saveStorage();
     }
 
     const toggleStatus = (id) => {
-        id = Number(id);
-        const objIndex = data.findIndex((entry) => entry.id === id);
+        const objIndex = getEntryIndex(id);
+        if (objIndex < 0) return;
         data[objIndex].done = data[objIndex].done ? false : true;
         saveStorage();
     }
 
     // Delete
     const deleteEntry = (id) => {
-        id = Number(id);
-        console.log ("Delete ", id);
-        const objIndex = data.findIndex((entry) => entry.id === id);
+        const objIndex = getEntryIndex(id);
+        if (objIndex < 0) return;
         data.splice(objIndex, 1);
         saveStorage();
     }
 
     const saveStorage = () => {
-        localStorage.setItem('tasks', JSON.stringify(data));
+        try {
+            localStorage.setItem('tasks', JSON.stringify(data));
+        } catch (e) {
+            alert ("Sorry, data storage failed: " + e.message);
+        }
         readEntries();
     }
 
