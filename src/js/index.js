@@ -1,9 +1,10 @@
 import "../css/style.scss";
 import enableAutoResize from "./autoResizeTextarea";
-import todolistCrud from "./todolistCrud.js";
+import todolistCrud from "./todolistController.js";
+import { createIcons, X, Plus, CupSoda } from 'lucide';
 
 window.addEventListener("DOMContentLoaded", () => {
     todolistCrud();
     enableAutoResize();
-    lucide.createIcons();
+    createIcons({icons: {X, Plus, CupSoda}});
 });
