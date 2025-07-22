@@ -1,33 +1,8 @@
 let data = [];
 
-export const writeData = (el) => {
-
-    // Bridgefunction if create, update or delete
-
-    // Textarea was sent off
-
-    const id = el.dataset.id;
-    const value = el.value;
-    const isEmpty = value.replace(/\s+/g, '') === '';
-
-    if (id) {
-        if (!isEmpty) { // if theres a value, update the entry
-            return updateEntry(el.value, id);    
-        } else {  // If empty, delete the entry
-           return deleteEntry(id);
-        }
-    } else {
-        if (isEmpty) return getTaskFromLocalStorage(); // Ask Noel for a nice solution here
-        el.value = '';
-        return createEntry(value);
-    }
-}
-
 // Create
 
-const createEntry = (value) => {
-
-    console.log(data);
+export const createEntry = (value) => {
 
     data.push({
         id: Date.now(),
@@ -55,7 +30,7 @@ const getTaskFromLocalStorage = () => {
 
 // Update
 
-const updateEntry = (value, id) => {
+export const updateEntry = (value, id) => {
     const objIndex = getEntryIndex(id);
     if (objIndex < 0) return;
     data[objIndex].task = value;

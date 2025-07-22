@@ -36,18 +36,21 @@ export const renderEntries = (entries) => {
 // Render a single entry into its list
 
 const renderEntry = (target, entry) => {
-    const liHtml = `
-            <li>
+    const liHtml = document.createElement('li');
+    liHtml.innerHTML = `
+            <task-entry>
                 <div>
                     <input type="checkbox" data-id="${entry.id}" ${entry.done ? 'checked' : ''}>
                 </div>
-                <div class="grow">
-                    <textarea rows="1" data-id="${entry.id}">${entry.task}</textarea>
-                </div>
+                <task-input class="grow">
+                    <div data-id="${entry.id}" class="taskinputfield" contenteditable></div>
+                </task-input>
                 <div>
                     <a href="#" data-id="${entry.id}" class="delete"><i data-lucide="x"></i></a>
                 </div>
-            </li>`;
+            </task-entry>
+            `;
 
-    target.insertAdjacentHTML('beforeend', liHtml);
+    liHtml.querySelector('.taskinputfield').innerHTML = entry.task;
+    target.prepend(liHtml);
 }

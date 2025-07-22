@@ -5,57 +5,30 @@ import * as view from './todolistView.js';
 export default function todolistController () {
 
     const init = () => {
-        prepareElements();
+        addListeners();
         const entries = model.readEntries();
         if (entries) view.renderEntries(entries);
 
     }
 
-    const prepareElements = () => {
+    const addListeners = () => {
 
-        // Adding events to document since we alter the DOM
+        // Listen to events dispatched by components
 
-        document.addEventListener('click', event => {
-
-            const link = event.target.closest("a");
-
-            if (link) {
-                // Delete an entry
-                if (link.matches('.delete')) {
-                    view.renderEntries(model.deleteEntry(link.dataset.id)); 
-                }
-            }
-            
-            // Toggle status of done
-            else if (event.target.matches("input[type=checkbox]")) {
-                view.renderEntries(model.toggleStatus(event.target.dataset.id));
-            }
-
+        document.addEventListener('toggleTaskStatus', event => {
+            view.renderEntries(model.toggleStatus(event.detail.id));
         });
 
-        document.addEventListener('keydown', event => {
-            const target = event.target;
-            if (target.matches("textarea")) {
-                if (event.key === "Enter") {
-                    
-                    event.preventDefault();
-                    
-                    if (event.ctrlKey || event.metaKey) {
-                        // Holding control will create a break
+        document.addEventListener('deleteTask', event => {
+            view.renderEntries(model.deleteEntry(event.detail.id));
+        });
 
-                        const start = target.selectionStart;
-                        const end = target.selectionEnd;
-                        const value = target.value;
+        document.addEventListener('createTask', event => {
+            view.renderEntries(model.createEntry(event.detail.task));
+        });
 
-                        target.value = value.substring(0, start) + "\n" + value.substring(end);
-
-                    } else {
-
-                        view.renderEntries(model.writeData(target));
-                    
-                    }
-                }
-            }
+        document.addEventListener('updateTask', event => {
+            view.renderEntries(model.updateEntry(event.detail.task, event.detail.id));
         });
     } 
 
