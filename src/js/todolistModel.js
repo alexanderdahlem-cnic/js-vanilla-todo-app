@@ -17,7 +17,7 @@ export const writeData = (el) => {
            return deleteEntry(id);
         }
     } else {
-        if (isEmpty) return;
+        if (isEmpty) return getTaskFromLocalStorage(); // Ask Noel for a nice solution here
         el.value = '';
         return createEntry(value);
     }
@@ -42,9 +42,13 @@ const getEntryIndex = (id) => {
     return  data.findIndex((entry) => entry.id === Number(id));
 }
 
+export const getTasks = () => {
+    return getTaskFromLocalStorage();
+} 
+
 // Read
 
-export const getTaskFromLocalStorage = () => {
+const getTaskFromLocalStorage = () => {
     data = JSON.parse(localStorage.getItem('tasks')) || [];
     return data;
 }

@@ -6,7 +6,7 @@ export default function todolistCrud () {
 
     const init = () => {
         prepareElements();
-        const entries = model.getTaskFromLocalStorage();
+        const entries = model.getTasks();
         if (entries) view.renderEntries(entries);
 
     }

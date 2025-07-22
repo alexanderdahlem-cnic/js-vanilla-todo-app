@@ -1,3 +1,5 @@
+import { createIcons, X, Plus, CupSoda } from 'lucide';
+
 const ulOpen = document.querySelector('#opentasks ul');
 const ulClosed = document.querySelector('#closedtasks ul');
 const noOpenInfo = document.querySelector('#noopentasks');
@@ -23,11 +25,11 @@ export const renderEntries = (entries) => {
             closedtasks.forEach(task => renderEntry(ulClosed, task));
         }
 
-        // createIcons({icons: {X}});
-
     } else {
         noOpenInfo.classList.remove('hidden');
     }
+
+    createIcons({icons: {X, Plus, CupSoda}});
 
 }
 
