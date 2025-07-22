@@ -2,11 +2,11 @@ import * as model from './todolistModel.js';
 import * as view from './todolistView.js';
 
 
-export default function todolistCrud () {
+export default function todolistController () {
 
     const init = () => {
         prepareElements();
-        const entries = model.getTasks();
+        const entries = model.readEntries();
         if (entries) view.renderEntries(entries);
 
     }

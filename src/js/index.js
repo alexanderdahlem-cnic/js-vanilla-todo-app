@@ -1,8 +1,8 @@
 import "../css/style.scss";
 import enableAutoResize from "./autoResizeTextarea";
-import todolistCrud from "./todolistController.js";
+import todolistController from "./todolistController.js";
 
 window.addEventListener("DOMContentLoaded", () => {
-    todolistCrud();
+    todolistController();
     enableAutoResize();
 });

@@ -42,7 +42,7 @@ const getEntryIndex = (id) => {
     return  data.findIndex((entry) => entry.id === Number(id));
 }
 
-export const getTasks = () => {
+export const readEntries = () => {
     return getTaskFromLocalStorage();
 } 
 
