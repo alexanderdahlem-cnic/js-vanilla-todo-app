@@ -55,8 +55,7 @@ const getTaskFromLocalStorage = () => {
 
 // Update
 
-const updateEntry = (value, id
-) => {
+const updateEntry = (value, id) => {
     const objIndex = getEntryIndex(id);
     if (objIndex < 0) return;
     data[objIndex].task = value;
