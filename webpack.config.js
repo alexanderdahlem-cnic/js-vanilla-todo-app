@@ -18,10 +18,15 @@ module.exports = {
     open: true,
     liveReload: true,
     hot: false,
-    watchFiles: ["public/**/*.html", "src/**/*.{js,scss}"],
+    watchFiles: ["public/**/*.html", "src/**/*.{js,ts,scss}"],
   },
   module: {
     rules: [
+      {
+        test: /\.ts$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /\.(scss|css)$/,
         use: [
@@ -39,6 +44,6 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: [".js", ".scss"],
+    extensions: [".ts", ".js", ".scss"],
   },
 };

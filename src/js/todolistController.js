@@ -1,5 +1,5 @@
-import * as model from './todolistModel.js';
-import * as view from './todolistView.js';
+import * as model from './todolistModel';
+import * as view from './todolistView';
 
 
 export default function todolistController () {
@@ -15,19 +15,19 @@ export default function todolistController () {
 
         // Listen to events dispatched by components
 
-        document.addEventListener('toggleTaskStatus', event => {
+        document.addEventListener('toggleTaskStatus', (event) => {
             view.renderEntries(model.toggleStatus(event.detail.id));
         });
 
-        document.addEventListener('deleteTask', event => {
+        document.addEventListener('deleteTask', (event) => {
             view.renderEntries(model.deleteEntry(event.detail.id));
         });
 
-        document.addEventListener('createTask', event => {
+        document.addEventListener('createTask', (event) => {
             view.renderEntries(model.createEntry(event.detail.task));
         });
 
-        document.addEventListener('updateTask', event => {
+        document.addEventListener('updateTask', (event) => {
             view.renderEntries(model.updateEntry(event.detail.task, event.detail.id));
         });
     } 
