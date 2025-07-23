@@ -522,7 +522,7 @@ video {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}body main textarea {
+}body main div.taskinputfield {
   display: block;
   height: auto;
   width: 100%;
@@ -532,10 +532,10 @@ video {
   font-size: 1rem;
   line-height: 1.5rem;
   line-height: 1.625;
-}body main textarea:focus {
+}body main div.taskinputfield:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
-}body main form#addtask {
+}body main div#addtask {
   position: relative;
   margin-bottom: 2rem;
 }body main #closedtasks li {
