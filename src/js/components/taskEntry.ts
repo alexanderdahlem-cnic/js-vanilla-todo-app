@@ -1,4 +1,8 @@
 class TaskEntry extends HTMLElement {
+
+    private checkbox!: HTMLInputElement;
+    private delete!: HTMLAnchorElement;
+
     constructor() {
       super();
     }
@@ -8,16 +12,16 @@ class TaskEntry extends HTMLElement {
         this.addListeners();
     } 
 
-    resolveElements = function () {
+    private resolveElements () {
         this.checkbox = this.querySelector('input[type="checkbox"]');
         this.delete = this.querySelector('a.delete');
     }
 
-    addListeners = function () {
+    private addListeners () {
 
         // Event toggle status
         this.checkbox.addEventListener('click', (e) => {
-            const id = e.target.dataset.id;
+            const id = (e.target as HTMLElement).dataset.id;
             this.dispatchEvent(new CustomEvent('toggleTaskStatus', {
                 bubbles: true,
                 detail: {
@@ -29,7 +33,7 @@ class TaskEntry extends HTMLElement {
         // Event delete task
         this.delete.addEventListener('click', (e) => {
             e.preventDefault();
-            const link = e.target.closest("a");
+            const link = (e.target as HTMLElement).closest("a");
 
             if (link) {
                 // Delete an entry
@@ -45,4 +49,6 @@ class TaskEntry extends HTMLElement {
     }
 }
 
-customElements.define('task-entry', TaskEntry);
+if (!customElements.get('task-entry')) {
+    customElements.define('task-entry', TaskEntry);
+}

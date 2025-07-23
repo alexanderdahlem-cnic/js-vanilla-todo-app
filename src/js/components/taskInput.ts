@@ -1,4 +1,6 @@
 class TaskInput extends HTMLElement {
+    private inputfield!: HTMLElement;
+    
     constructor() {
       super();
     }
@@ -8,13 +10,13 @@ class TaskInput extends HTMLElement {
         this.addListeners();
     } 
 
-    resolveElements = function () {
+    private resolveElements () {
         this.inputfield = this.querySelector('.taskinputfield');
     }
 
-    addListeners = function () {
+    private addListeners () {
         this.inputfield.addEventListener('keydown', (e) => {
-            const target = e.target;
+            const target = (e.target as HTMLElement);
             if (e.key === "Enter") {
                 
                 if (e.shiftKey) return;  // Just a break, hold your horses
@@ -22,7 +24,7 @@ class TaskInput extends HTMLElement {
                 e.preventDefault();
 
                 const isEmpty = target.textContent.replace(/\s+/g, '') === '';
-                const id = e.target.dataset.id;
+                const id = target.dataset.id;
 
                 if (id) { // Existing entry needs an update
                     if (isEmpty) { // if task description is empty, delete whole task
@@ -59,17 +61,20 @@ class TaskInput extends HTMLElement {
         });
 
         this.inputfield.addEventListener('paste', (e) => {
+            const target = (e.target as HTMLElement);
             setTimeout(() => { // we sanitize right after paste
-                const data = this.sanitize(e.target.innerHTML)
-                e.target.innerHTML = data;
+                const data = this.sanitize(target.innerHTML)
+                target.innerHTML = data;
             }, 10)
         });
         
     }
 
-    sanitize = function (data) {
+    private sanitize (data) {
         return data.replace(/<(?!br\s*\/?)[^>]+>/gi, '');
     }
 }
 
-customElements.define('task-input', TaskInput);
+if (!customElements.get('task-input')) {
+    customElements.define('task-input', TaskInput);
+}

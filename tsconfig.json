@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "outDir": "./public/dist/js"                             /* Skip type checking all .d.ts files. */
+    "target": "ES6",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    // "strict": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
   }
 }
