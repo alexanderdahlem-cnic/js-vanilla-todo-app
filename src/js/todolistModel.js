@@ -18,12 +18,12 @@ const getEntryIndex = (id) => {
 }
 
 export const readEntries = () => {
-    return getTaskFromLocalStorage();
+    return getTasksFromLocalStorage();
 } 
 
 // Read
 
-const getTaskFromLocalStorage = () => {
+const getTasksFromLocalStorage = () => {
     data = JSON.parse(localStorage.getItem('tasks')) || [];
     return data;
 }
@@ -58,6 +58,6 @@ const saveStorage = () => {
     } catch (e) {
         alert ("Sorry, data storage failed: " + e.message);
     }
-    const storedTasks = getTaskFromLocalStorage();
+    const storedTasks = getTasksFromLocalStorage();
     return storedTasks;
 }
