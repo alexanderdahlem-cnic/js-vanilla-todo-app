@@ -1,8 +1,16 @@
-let data = [];
+// Data Structure
+
+export interface Task {
+    readonly id: number;
+    task: string;
+    done: boolean;
+}
+
+let data:Task[];
 
 // Create
 
-export const createEntry = (value) => {
+export const createEntry = (value: Task['task']) => {
 
     data.push({
         id: Date.now(),
@@ -13,7 +21,7 @@ export const createEntry = (value) => {
     return saveStorage();
 }
 
-const getEntryIndex = (id) => {
+const getEntryIndex = (id: Task['id']):number => {
     return  data.findIndex((entry) => entry.id === Number(id));
 }
 
@@ -23,21 +31,21 @@ export const readEntries = () => {
 
 // Read
 
-const getTasksFromLocalStorage = () => {
+const getTasksFromLocalStorage = ():Task[] => {
     data = JSON.parse(localStorage.getItem('tasks')) || [];
     return data;
 }
 
 // Update
 
-export const updateEntry = (value, id) => {
+export const updateEntry = (value:Task['task'], id:Task['id']) => {
     const objIndex = getEntryIndex(id);
     if (objIndex < 0) return;
     data[objIndex].task = value;
     return saveStorage();
 }
 
-export const toggleStatus = (id) => {
+export const toggleStatus = (id:Task['id']) => {
     const objIndex = getEntryIndex(id);
     if (objIndex < 0) return;
     data[objIndex].done = data[objIndex].done ? false : true;
@@ -45,19 +53,18 @@ export const toggleStatus = (id) => {
 }
 
 // Delete
-export const deleteEntry = (id) => {
+export const deleteEntry = (id:Task['id']) => {
     const objIndex = getEntryIndex(id);
     if (objIndex < 0) return;
     data.splice(objIndex, 1);
     return saveStorage();
 }
 
-const saveStorage = () => {
+const saveStorage = ():Task[] => {
     try {
         localStorage.setItem('tasks', JSON.stringify(data));
     } catch (e) {
         alert ("Sorry, data storage failed: " + e.message);
     }
-    const storedTasks = getTasksFromLocalStorage();
-    return storedTasks;
+    return getTasksFromLocalStorage();
 }

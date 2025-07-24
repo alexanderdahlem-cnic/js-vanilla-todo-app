@@ -12,12 +12,12 @@ class TaskEntry extends HTMLElement {
         this.addListeners();
     } 
 
-    private resolveElements () {
+    private resolveElements ():void {
         this.checkbox = this.querySelector('input[type="checkbox"]');
         this.delete = this.querySelector('a.delete');
     }
 
-    private addListeners () {
+    private addListeners ():void {
 
         // Event toggle status
         this.checkbox.addEventListener('click', (e) => {
@@ -49,6 +49,4 @@ class TaskEntry extends HTMLElement {
     }
 }
 
-if (!customElements.get('task-entry')) {
-    customElements.define('task-entry', TaskEntry);
-}
+customElements.define('task-entry', TaskEntry);

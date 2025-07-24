@@ -1,10 +1,11 @@
 import { createIcons, X, Plus, CupSoda } from 'lucide';
+import {Task} from './todolistModel';
 
-const ulOpen = document.querySelector('#opentasks ul');
-const ulClosed = document.querySelector('#closedtasks ul');
-const noOpenInfo = document.querySelector('#noopentasks');
+export const renderEntries = (entries:Task[]): void => {
 
-export const renderEntries = (entries) => {
+    const ulOpen:HTMLElement = document.querySelector('ul#opentaskslist');
+    const ulClosed:HTMLElement = document.querySelector('#closedtaskslist');
+    const noOpenInfo:HTMLElement = document.querySelector('#noopentasks');
 
     ulOpen.innerHTML = '';
     ulClosed.innerHTML = '';
@@ -35,7 +36,7 @@ export const renderEntries = (entries) => {
 
 // Render a single entry into its list
 
-const renderEntry = (target, entry) => {
+const renderEntry = (target:HTMLElement, entry:Task):void => {
     const liHtml = document.createElement('li');
     liHtml.innerHTML = `
             <task-entry>

@@ -11,28 +11,28 @@ export default function todolistController ():void {
 
     }
 
-    const addListeners = () => {
+    const addListeners = ():void => {
 
         // Listen to events dispatched by components
 
-        document.addEventListener('toggleTaskStatus', (event: CustomEvent):void => {
+        document.addEventListener('toggleTaskStatus', (event: CustomEvent) => {
             view.renderEntries(model.toggleStatus(event.detail.id));
         });
 
-        document.addEventListener('deleteTask', (event: CustomEvent):void => {
+        document.addEventListener('deleteTask', (event: CustomEvent) => {
             view.renderEntries(model.deleteEntry(event.detail.id));
         });
 
-        document.addEventListener('createTask', (event: CustomEvent):void => {
+        document.addEventListener('createTask', (event: CustomEvent) => {
             view.renderEntries(model.createEntry(event.detail.task));
         });
 
-        document.addEventListener('updateTask', (event: CustomEvent):void => {
+        document.addEventListener('updateTask', (event: CustomEvent) => {
             view.renderEntries(model.updateEntry(event.detail.task, event.detail.id));
         });
 
         // Synchronize between tabs
-        window.addEventListener('storage', ():void => {
+        window.addEventListener('storage', () => {
             view.renderEntries(model.readEntries());
         })
     } 
