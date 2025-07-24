@@ -32,7 +32,15 @@ export const readEntries = () => {
 // Read
 
 const getTasksFromLocalStorage = ():Task[] => {
-    data = JSON.parse(localStorage.getItem('tasks')) || [];
+    try {
+     const storedTasks = localStorage.getItem('tasks');
+     if (!storedTasks) {
+       data = [];
+     }
+     data = JSON.parse(storedTasks);
+    } catch (error) {
+      data = [];
+    }
     return data;
 }
 
